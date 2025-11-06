@@ -1,10 +1,37 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Icon from "@/components/ui/icon";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 const Index = () => {
+  const { toast } = useToast();
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    setTimeout(() => {
+      toast({
+        title: "Заявка отправлена!",
+        description: "Мы свяжемся с вами в ближайшее время.",
+      });
+      setFormData({ name: '', email: '', phone: '', message: '' });
+      setIsSubmitting(false);
+    }, 1000);
   };
 
   return (
@@ -159,34 +186,107 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="contact" className="py-24 px-6 bg-primary text-primary-foreground">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-5xl font-bold font-montserrat mb-6">Готовы начать?</h2>
-          <p className="text-xl mb-12 opacity-90">
-            Свяжитесь с нами, чтобы обсудить ваш проект
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-            <a href="mailto:hello@prodfilm.ru" className="flex items-center gap-3 text-lg hover:opacity-80 transition-opacity">
-              <Icon name="Mail" size={24} />
-              hello@prodfilm.ru
-            </a>
-            <a href="tel:+79991234567" className="flex items-center gap-3 text-lg hover:opacity-80 transition-opacity">
-              <Icon name="Phone" size={24} />
-              +7 (999) 123-45-67
-            </a>
+      <section id="contact" className="py-24 px-6 bg-secondary/30">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold font-montserrat mb-4">Готовы начать?</h2>
+            <p className="text-xl text-muted-foreground">
+              Оставьте заявку и мы свяжемся с вами в ближайшее время
+            </p>
           </div>
 
-          <div className="flex gap-6 justify-center">
-            <a href="#" className="w-12 h-12 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-primary-foreground/20 transition-colors">
-              <Icon name="Instagram" size={24} />
-            </a>
-            <a href="#" className="w-12 h-12 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-primary-foreground/20 transition-colors">
-              <Icon name="Youtube" size={24} />
-            </a>
-            <a href="#" className="w-12 h-12 bg-primary-foreground/10 rounded-full flex items-center justify-center hover:bg-primary-foreground/20 transition-colors">
-              <Icon name="Send" size={24} />
-            </a>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div>
+              <h3 className="text-2xl font-semibold font-montserrat mb-6">Контактная информация</h3>
+              
+              <div className="space-y-6">
+                <a href="mailto:hello@prodfilm.ru" className="flex items-center gap-4 text-lg hover:text-accent transition-colors group">
+                  <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <Icon name="Mail" size={24} className="text-accent" />
+                  </div>
+                  hello@prodfilm.ru
+                </a>
+                <a href="tel:+79991234567" className="flex items-center gap-4 text-lg hover:text-accent transition-colors group">
+                  <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                    <Icon name="Phone" size={24} className="text-accent" />
+                  </div>
+                  +7 (999) 123-45-67
+                </a>
+                <div className="flex items-center gap-4 text-lg">
+                  <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                    <Icon name="MapPin" size={24} className="text-accent" />
+                  </div>
+                  Москва, Россия
+                </div>
+              </div>
+
+              <div className="mt-12">
+                <h4 className="text-lg font-semibold font-montserrat mb-4">Мы в соцсетях</h4>
+                <div className="flex gap-4">
+                  <a href="#" className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-colors">
+                    <Icon name="Instagram" size={24} className="text-accent" />
+                  </a>
+                  <a href="#" className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-colors">
+                    <Icon name="Youtube" size={24} className="text-accent" />
+                  </a>
+                  <a href="#" className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center hover:bg-accent/20 transition-colors">
+                    <Icon name="Send" size={24} className="text-accent" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <Card className="p-8">
+              <h3 className="text-2xl font-semibold font-montserrat mb-6">Оставить заявку</h3>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Ваше имя</label>
+                  <Input
+                    type="text"
+                    placeholder="Иван Иванов"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    required
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Email</label>
+                  <Input
+                    type="email"
+                    placeholder="ivan@example.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    required
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Телефон</label>
+                  <Input
+                    type="tel"
+                    placeholder="+7 (999) 123-45-67"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    required
+                    className="w-full"
+                  />
+                </div>
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Расскажите о проекте</label>
+                  <Textarea
+                    placeholder="Опишите ваш проект и задачи..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    required
+                    className="w-full min-h-[120px]"
+                  />
+                </div>
+                <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? "Отправка..." : "Отправить заявку"}
+                </Button>
+              </form>
+            </Card>
           </div>
         </div>
       </section>
