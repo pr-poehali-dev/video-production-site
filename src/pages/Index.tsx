@@ -84,9 +84,9 @@ const Index = () => {
               { img: "https://cdn.poehali.dev/projects/7a100550-4453-43bb-bb37-3a52b757b26a/files/fdb38516-85ad-4c39-abf4-fe9d29d8a574.jpg", title: "Рекламная кампания", desc: "Производство для крупного бренда" },
               { img: "https://cdn.poehali.dev/projects/7a100550-4453-43bb-bb37-3a52b757b26a/files/ee704539-9f87-4d59-92c0-7e6101887666.jpg", title: "Корпоративный фильм", desc: "Презентация компании" },
               { img: "https://cdn.poehali.dev/projects/7a100550-4453-43bb-bb37-3a52b757b26a/files/d72918c3-8c3a-4b28-bbd0-2a298c20d7a9.jpg", title: "Цветокоррекция", desc: "Постпродакшн проекта" },
-              { img: "https://cdn.poehali.dev/projects/7a100550-4453-43bb-bb37-3a52b757b26a/files/fdb38516-85ad-4c39-abf4-fe9d29d8a574.jpg", title: "Социальные ролики", desc: "Контент для соцсетей" },
-              { img: "https://cdn.poehali.dev/projects/7a100550-4453-43bb-bb37-3a52b757b26a/files/ee704539-9f87-4d59-92c0-7e6101887666.jpg", title: "Продуктовое видео", desc: "Съёмка товаров" },
-              { img: "https://cdn.poehali.dev/projects/7a100550-4453-43bb-bb37-3a52b757b26a/files/d72918c3-8c3a-4b28-bbd0-2a298c20d7a9.jpg", title: "Моушн графика", desc: "Анимированные ролики" }
+              { img: "https://cdn.poehali.dev/projects/7a100550-4453-43bb-bb37-3a52b757b26a/files/0b4b6f28-2aaa-47aa-ae55-098b32c32770.jpg", title: "Социальные ролики", desc: "Контент для соцсетей" },
+              { img: "https://cdn.poehali.dev/projects/7a100550-4453-43bb-bb37-3a52b757b26a/files/77e78832-af66-404f-ac8b-ec50c01b6b93.jpg", title: "Продуктовое видео", desc: "Съёмка товаров" },
+              { img: "https://cdn.poehali.dev/projects/7a100550-4453-43bb-bb37-3a52b757b26a/files/c8a28456-9e3a-48d8-9dfd-269572c86350.jpg", title: "Моушн графика", desc: "Анимированные ролики" }
             ].map((item, idx) => (
               <Card key={idx} className="overflow-hidden group cursor-pointer animate-scale-in hover:shadow-2xl transition-all duration-300">
                 <div className="aspect-video relative overflow-hidden">
